@@ -2,32 +2,30 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { useColorScheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles'; // Use useTheme instead of useColorScheme
 
 import { NoSsr } from '@/components/core/no-ssr';
 
-const HEIGHT = 60;
-const WIDTH = 60;
+
 
 type Color = 'dark' | 'light';
 
 export interface LogoProps {
   color?: Color;
   emblem?: boolean;
-  height?: number;
-  width?: number;
+ 
 }
 
-export function Logo({ color = 'dark', emblem, height = HEIGHT, width = WIDTH }: LogoProps): React.JSX.Element {
+export function Logo({ color = 'dark', emblem }: LogoProps): React.JSX.Element {
   let url: string;
 
   if (emblem) {
-    url = color === 'light' ? '/assets/logo-emblem.svg' : '/assets/logo-emblem--dark.svg';
+    url = color === 'light' ? '/assets/unitfactor.svg' : '/assets/ufLogo.svg';
   } else {
-    url = color === 'light' ? '/assets/logo.svg' : '/assets/logo--dark.svg';
+    url = color === 'light' ? '/assets/ufLogo.svg' : '/assets/unitfactor.svg';
   }
 
-  return <Box alt="logo" component="img" height={height} src={url} width={width} />;
+  return <Box component="img" alt="logo" src={url} width={100} height={100}/>;
 }
 
 export interface DynamicLogoProps {
@@ -41,16 +39,16 @@ export interface DynamicLogoProps {
 export function DynamicLogo({
   colorDark = 'light',
   colorLight = 'dark',
-  height = HEIGHT,
-  width = WIDTH,
+
   ...props
 }: DynamicLogoProps): React.JSX.Element {
-  const { colorScheme } = useColorScheme();
+  const theme = useTheme();
+  const colorScheme = theme.palette.mode; // Access the color scheme from theme
   const color = colorScheme === 'dark' ? colorDark : colorLight;
 
   return (
-    <NoSsr fallback={<Box sx={{ height: `${height}px`, width: `${width}px` }} />}>
-      <Logo color={color} height={height} width={width} {...props} />
+    <NoSsr fallback={<Box/>}>
+      <Logo color={color}  {...props}  />
     </NoSsr>
   );
 }
