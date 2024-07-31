@@ -6,6 +6,8 @@ import { useColorScheme } from '@mui/material/styles';
 
 import { NoSsr } from '@/components/core/no-ssr';
 
+
+
 const HEIGHT = 60;
 const WIDTH = 60;
 
@@ -14,8 +16,8 @@ type Color = 'dark' | 'light';
 export interface LogoProps {
   color?: Color;
   emblem?: boolean;
-  height?: number;
-  width?: number;
+  height?: number; // Ensure height is included
+  width?: number;  // Ensure width is included
 }
 
 export function Logo({ color = 'dark', emblem, height = HEIGHT, width = WIDTH }: LogoProps): React.JSX.Element {
@@ -26,6 +28,7 @@ export function Logo({ color = 'dark', emblem, height = HEIGHT, width = WIDTH }:
   } else {
     url = color === 'light' ? '/assets/ufLogo.svg' : '/assets/unitfactor.svg';
   }
+
   return <Box alt="logo" component="img" height={height} src={url} width={width} />;
 }
 
