@@ -1,15 +1,13 @@
-'use client';
+// ./src/components/dashboard/layout/mobile-nav.tsx
 
 import * as React from 'react';
 import RouterLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import Box from '@mui/material/Box';
-
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
 
 import type { NavItemConfig } from '@/types/nav';
 import { paths } from '@/paths';
