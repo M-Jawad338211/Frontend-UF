@@ -53,13 +53,16 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
 
     let styles = '';
     let dataEmotionAttribute = registry.cache.key;
-
+    
     const globals: { name: string; style: string }[] = [];
-
+    
+    // Iterate over each inserted item
     inserted.forEach(({ name, isGlobal }) => {
+      // Retrieve the style for the given name
       const style = registry.cache.inserted[name];
-
-      if (typeof style !== 'boolean') {
+    
+      // Check if style is a string
+      if (typeof style === 'string') {
         if (isGlobal) {
           globals.push({ name, style });
         } else {
@@ -68,6 +71,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
         }
       }
     });
+    
 
     return (
       <React.Fragment>
