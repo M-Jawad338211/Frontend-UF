@@ -2,12 +2,12 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles'; // Use useTheme instead of useColorScheme
+import { useColorScheme } from '@mui/material/styles';
 
 import { NoSsr } from '@/components/core/no-ssr';
 
-const HEIGHT = 200;
-const WIDTH = 200;
+const HEIGHT = 60;
+const WIDTH = 60;
 
 type Color = 'dark' | 'light';
 
@@ -26,8 +26,7 @@ export function Logo({ color = 'dark', emblem, height = HEIGHT, width = WIDTH }:
   } else {
     url = color === 'light' ? '/assets/ufLogo.svg' : '/assets/unitfactor.svg';
   }
-
-  return <Box component="img" alt="logo" src={url} height={height} width={width} />;
+  return <Box alt="logo" component="img" height={height} src={url} width={width} />;
 }
 
 export interface DynamicLogoProps {
@@ -45,8 +44,7 @@ export function DynamicLogo({
   width = WIDTH,
   ...props
 }: DynamicLogoProps): React.JSX.Element {
-  const theme = useTheme();
-  const colorScheme = theme.palette.mode; // Access the color scheme from theme
+  const { colorScheme } = useColorScheme();
   const color = colorScheme === 'dark' ? colorDark : colorLight;
 
   return (
